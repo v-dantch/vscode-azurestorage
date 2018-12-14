@@ -81,6 +81,9 @@ export async function activate(context: vscode.ExtensionContext): Promise<AzureE
                     mustBeWebsiteCapable: true,
                     askToConfigureWebsite: false
                 });
+            if (!treeItem) {
+                treeItem = await ext.tree.showTreeItemPicker(StorageAccountTreeItem.contextValue);
+            }
             await accountTreeItem.configureStaticWebsite();
         });
         registerCommand('azureStorage.browseStaticWebsite', async function (this: IActionContext, treeItem?: AzureTreeItem): Promise<void> {
